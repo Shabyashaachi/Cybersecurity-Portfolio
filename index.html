@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourajyoti Paul — Cybersecurity Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c10;
+  --surface: #0d1117;
+  --surface2: #111820;
+  --surface3: #161f2c;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --faint: #1e2d3d;
+  --accent: #38bdf8;
+  --accent2: #0ea5e9;
+  --gold: #f59e0b;
+  --gold2: #fbbf24;
+  --red: #f87171;
+  --green: #4ade80;
+  --purple: #a78bfa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* GRID LINES */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 60px;
+  background: rgba(8,12,16,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  border: 1px solid rgba(56,189,248,0.3);
+  padding: 7px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.nav-cta:hover {
+  background: rgba(56,189,248,0.1);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+  z-index: 1;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 15%;
+  left: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  bottom: 10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(56,189,248,0.25);
+  background: rgba(56,189,248,0.05);
+  padding: 5px 12px;
+  border-radius: 4px;
+  margin-bottom: 28px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(74,222,128,0); }
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 5.5vw, 68px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #f1f5f9;
+  margin-bottom: 8px;
+}
+
+.hero h1 .line2 {
+  color: var(--accent);
+  display: block;
+}
+
+.hero-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 28px;
+}
+
+.role-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 3px;
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  color: var(--muted);
+}
+
+.role-pill.active {
+  background: rgba(56,189,248,0.08);
+  border-color: rgba(56,189,248,0.3);
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+
+.hero-desc strong { color: var(--text); font-weight: 500; }
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #080c10;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 12px 24px;
+  border-radius: 5px;
+  border: 1px solid var(--border2);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* HERO CARD */
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--purple), var(--gold));
+}
+
+.card-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(167,139,250,0.2));
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.card-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.card-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+
+.card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.stat-num.accent { color: var(--accent); }
+.stat-num.gold { color: var(--gold); }
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.card-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 7px 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── SECTIONS ── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin-left: 16px;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--border);
+  transition: background 0.2s;
+}
+
+.project-card:hover {
+  border-color: var(--border2);
+  transform: translateX(4px);
+}
+
+.project-card:hover::before { background: var(--accent); }
+.project-card.gold-accent:hover::before { background: var(--gold); }
+.project-card.purple-accent:hover::before { background: var(--purple); }
+
+.project-track {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.project-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.project-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 600px;
+  margin-bottom: 16px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.tag.highlight {
+  background: rgba(56,189,248,0.07);
+  border-color: rgba(56,189,248,0.25);
+  color: var(--accent);
+}
+
+.project-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.status-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+.status-badge.done {
+  background: rgba(74,222,128,0.1);
+  color: var(--green);
+  border: 1px solid rgba(74,222,128,0.25);
+}
+
+.status-badge.wip {
+  background: rgba(245,158,11,0.1);
+  color: var(--gold2);
+  border: 1px solid rgba(245,158,11,0.25);
+}
+
+.project-arrow {
+  font-size: 18px;
+  color: var(--border2);
+  transition: color 0.2s;
+}
+
+.project-card:hover .project-arrow { color: var(--accent); }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.skill-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+
+.skill-block-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-block-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  letter-spacing: 0.03em;
+}
+
+.skill-pill.core {
+  background: rgba(56,189,248,0.07);
+  border-color: rgba(56,189,248,0.2);
+  color: var(--accent);
+}
+
+/* ── CERTS ── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cert-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.cert-icon.letsdefend { background: rgba(56,189,248,0.1); }
+.cert-icon.cisco { background: rgba(74,222,128,0.1); }
+.cert-icon.cybrary { background: rgba(167,139,250,0.1); }
+.cert-icon.udemy { background: rgba(245,158,11,0.1); }
+
+.cert-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.cert-issuer {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.cert-status {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+}
+
+.cert-status.done { color: var(--green); }
+.cert-status.wip { color: var(--gold2); }
+
+/* ── PUBLICATIONS ── */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pub-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+
+.pub-card:hover { border-color: var(--border2); }
+
+.pub-type {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pub-type.book { background: rgba(245,158,11,0.1); color: var(--gold2); border: 1px solid rgba(245,158,11,0.2); }
+.pub-type.article { background: rgba(56,189,248,0.08); color: var(--accent); border: 1px solid rgba(56,189,248,0.2); }
+.pub-type.upcoming { background: var(--surface3); color: var(--muted); border: 1px solid var(--border); }
+
+.pub-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.pub-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 48px;
+  border-top: 1px solid var(--border);
+}
+
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.contact-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.contact-sub {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.contact-link:hover {
+  color: var(--accent);
+  border-color: rgba(56,189,248,0.3);
+}
+
+.contact-link-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.3s; }
+.d4 { animation-delay: 0.4s; }
+.d5 { animation-delay: 0.5s; }
+.d6 { animation-delay: 0.6s; }
+
+/* ── DIVIDER ── */
+.full-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SP<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#publications">Publications</a></li>
+  </ul>
+  <a href="mailto:sourajyoti.nehu.ac@gmail.com" class="nav-cta">Get in touch →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag fade-up d1">
+        <span class="status-dot"></span>
+        Open to EU roles · Remote or relocation
+      </div>
+      <h1 class="fade-up d2">
+        Sourajyoti
+        <span class="line2">Paul</span>
+      </h1>
+      <div class="hero-roles fade-up d3">
+        <span class="role-pill active">EASM Analyst</span>
+        <span class="role-pill active">SOC · Tier 2</span>
+        <span class="role-pill active">Threat Intelligence</span>
+        <span class="role-pill">GRC · NIS2 · DORA</span>
+        <span class="role-pill">Detection Engineering</span>
+      </div>
+      <p class="hero-desc fade-up d4">
+        Cybersecurity analyst with <strong>1 year real-world experience</strong> in SOC operations, SIEM engineering, and OSINT-driven attack surface analysis. Targeting European security teams with a focus on <strong>NIS2-aware risk analysis</strong> and <strong>actionable threat intelligence</strong>.
+      </p>
+      <div class="hero-actions fade-up d5">
+        <a href="#projects" class="btn-primary">View Portfolio ↓</a>
+        <a href="https://github.com/Shabyashaachi" class="btn-secondary">GitHub Profile</a>
+        <a href="https://linkedin.com/in/sourajyoti-paul-0a2aa9263" class="btn-secondary">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="hero-card fade-up d3">
+      <div class="card-avatar">SP</div>
+      <div class="card-name">Sourajyoti Paul</div>
+      <div class="card-title">CYBERSECURITY ANALYST · EU-FOCUSED</div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-num accent">1yr</div>
+          <div class="stat-label">Real experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num gold">2</div>
+          <div class="stat-label">Publications</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Role tracks</div>
+        </div>
+      </div>
+      <div class="card-badges">
+        <div class="badge">
+          <span class="badge-dot" style="background:var(--accent)"></span>
+          IBM QRadar · Splunk · Wazuh
+        </div>
+        <div class="badge">
+          <span class="badge-dot" style="background:var(--gold)"></span>
+          NIS2 · DORA · ISO 27001
+        </div>
+        <div class="badge">
+          <span class="badge-dot" style="background:var(--purple)"></span>
+          MITRE ATT&CK · Sigma Rules
+        </div>
+        <div class="badge">
+          <span class="badge-dot" style="background:var(--green)"></span>
+          OSINT · theHarvester · Shodan
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- PROJECTS -->
+<div id="projects" style="position:relative;z-index:1;padding:0 48px;">
+<div style="max-width:1100px;margin:0 auto;padding:80px 0 0;">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Portfolio Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- EASM -->
+    <div class="project-card" onclick="window.open('https://github.com/Shabyashaachi/cybersecurity-portfolio/tree/main/01-easm','_blank')">
+      <div>
+        <div class="project-track">🔍 Track 01 · EASM</div>
+        <div class="project-name">NorthBridge Logistics — EASM Engagement</div>
+        <div class="project-desc">Full passive OSINT-driven external attack surface assessment of a fictional European logistics company. 10 findings including exposed RDP, missing DMARC, breached credentials, and unauthenticated API. Includes executive summary, threat actor profiles (Cl0p, LockBit, APT28), and NIS2 compliance mapping.</div>
+        <div class="project-tags">
+          <span class="tag highlight">OSINT</span>
+          <span class="tag highlight">Shodan</span>
+          <span class="tag highlight">NIS2</span>
+          <span class="tag highlight">MITRE ATT&CK</span>
+          <span class="tag">Threat Intel</span>
+          <span class="tag">Risk Register</span>
+          <span class="tag">DMARC</span>
+          <span class="tag">SpiderFoot</span>
+        </div>
+      </div>
+      <div class="project-status">
+        <span class="status-badge done">✓ Complete</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- Sigma -->
+    <div class="project-card gold-accent" onclick="window.open('https://github.com/Shabyashaachi/cybersecurity-portfolio/tree/main/02-soc','_blank')">
+      <div>
+        <div class="project-track">🛡️ Track 02 · SOC · Detection Engineering</div>
+        <div class="project-name">Sigma Detection Rules Library</div>
+        <div class="project-desc">20 production-ready Sigma rules covering ransomware precursors, lateral movement (PsExec, WMI), credential dumping (LSASS), and phishing delivery. Each rule includes MITRE ATT&CK mapping, false positive guidance, and tuning notes for QRadar and Splunk.</div>
+        <div class="project-tags">
+          <span class="tag highlight">Sigma</span>
+          <span class="tag highlight">MITRE ATT&CK</span>
+          <span class="tag">QRadar</span>
+          <span class="tag">Splunk</span>
+          <span class="tag">Wazuh</span>
+          <span class="tag">Detection Engineering</span>
+        </div>
+      </div>
+      <div class="project-status">
+        <span class="status-badge wip">↻ Building</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- Playbooks -->
+    <div class="project-card gold-accent">
+      <div>
+        <div class="project-track">🛡️ Track 02 · SOC · Incident Response</div>
+        <div class="project-name">SOC Incident Response Playbooks</div>
+        <div class="project-desc">Structured IR playbooks for BEC, ransomware, credential stuffing, phishing triage, and data exfiltration. Built around NIST 800-61, with escalation trees, containment actions, and evidence collection checklists.</div>
+        <div class="project-tags">
+          <span class="tag">Incident Response</span>
+          <span class="tag">NIST 800-61</span>
+          <span class="tag">BEC</span>
+          <span class="tag">Ransomware</span>
+          <span class="tag">SOC Workflow</span>
+        </div>
+      </div>
+      <div class="project-status">
+        <span class="status-badge wip">↻ Building</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- NIS2 -->
+    <div class="project-card purple-accent">
+      <div>
+        <div class="project-track">📋 Track 03 · GRC · NIS2</div>
+        <div class="project-name">NIS2 Gap Assessment — Fictional EU Company</div>
+        <div class="project-desc">Article 21 compliance gap analysis for a fictional EU logistics company. Maps existing security controls to NIS2 obligations, identifies gaps in supply chain security, MFA, incident reporting, and third-party risk. Directly relevant to EU companies implementing NIS2 from October 2024.</div>
+        <div class="project-tags">
+          <span class="tag highlight">NIS2</span>
+          <span class="tag highlight">DORA</span>
+          <span class="tag">ISO 27001</span>
+          <span class="tag">Gap Analysis</span>
+          <span class="tag">EU Compliance</span>
+          <span class="tag">Supply Chain</span>
+        </div>
+      </div>
+      <div class="project-status">
+        <span class="status-badge wip">↻ Building</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- CTI -->
+    <div class="project-card">
+      <div>
+        <div class="project-track">🕵️ Track 04 · Threat Intelligence · CTI</div>
+        <div class="project-name">LockBit Threat Intel Report — EU Finance Sector</div>
+        <div class="project-desc">Structured threat intelligence report profiling LockBit affiliate activity targeting European financial institutions. Covers TTP analysis, IOC samples, Diamond Model application, MITRE ATT&CK mapping, and defensive recommendations aligned to DORA ICT risk requirements.</div>
+        <div class="project-tags">
+          <span class="tag">CTI</span>
+          <span class="tag">LockBit</span>
+          <span class="tag highlight">DORA</span>
+          <span class="tag">MITRE ATT&CK</span>
+          <span class="tag">Diamond Model</span>
+          <span class="tag">IOC</span>
+        </div>
+      </div>
+      <div class="project-status">
+        <span class="status-badge wip">↻ Building</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="full-divider" style="margin-top:80px;">
+
+<!-- SKILLS -->
+<div id="skills" style="position:relative;z-index:1;padding:0 48px;">
+<div style="max-width:1100px;margin:0 auto;padding:80px 0 0;">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-block-title">SIEM & Detection</div>
+      <div class="skill-pills">
+        <span class="skill-pill core">IBM QRadar</span>
+        <span class="skill-pill core">Splunk</span>
+        <span class="skill-pill core">Wazuh</span>
+        <span class="skill-pill">Sigma Rules</span>
+        <span class="skill-pill">Correlation Rules</span>
+        <span class="skill-pill">False Positive Tuning</span>
+        <span class="skill-pill">Log Analysis</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">OSINT & EASM</div>
+      <div class="skill-pills">
+        <span class="skill-pill core">theHarvester</span>
+        <span class="skill-pill core">Shodan</span>
+        <span class="skill-pill core">Maltego</span>
+        <span class="skill-pill">SpiderFoot</span>
+        <span class="skill-pill">Censys</span>
+        <span class="skill-pill">crt.sh</span>
+        <span class="skill-pill">DMARC/SPF Analysis</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">SOC Operations</div>
+      <div class="skill-pills">
+        <span class="skill-pill core">Incident Response</span>
+        <span class="skill-pill core">Threat Hunting</span>
+        <span class="skill-pill">Alert Triage</span>
+        <span class="skill-pill">Malware Analysis</span>
+        <span class="skill-pill">SOAR Playbooks</span>
+        <span class="skill-pill">Flare-VM</span>
+        <span class="skill-pill">Any.Run</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">GRC & Compliance</div>
+      <div class="skill-pills">
+        <span class="skill-pill core">NIS2</span>
+        <span class="skill-pill core">DORA</span>
+        <span class="skill-pill core">ISO 27001</span>
+        <span class="skill-pill">NIST CSF</span>
+        <span class="skill-pill">PCI-DSS</span>
+        <span class="skill-pill">HIPAA</span>
+        <span class="skill-pill">Risk Assessment</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="full-divider" style="margin-top:80px;">
+
+<!-- CERTS -->
+<div id="certs" style="position:relative;z-index:1;padding:0 48px;">
+<div style="max-width:1100px;margin:0 auto;padding:80px 0 0;">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon letsdefend">🛡</div>
+      <div>
+        <div class="cert-name">SOC Analyst</div>
+        <div class="cert-issuer">LetsDefend</div>
+      </div>
+      <span class="cert-status done">✓</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon letsdefend">📊</div>
+      <div>
+        <div class="cert-name">SIEM Engineer</div>
+        <div class="cert-issuer">LetsDefend</div>
+      </div>
+      <span class="cert-status done">✓</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon letsdefend">🔍</div>
+      <div>
+        <div class="cert-name">Detection Engineering</div>
+        <div class="cert-issuer">LetsDefend</div>
+      </div>
+      <span class="cert-status wip">In progress</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon cisco">🌐</div>
+      <div>
+        <div class="cert-name">Cyberdefence Analyst</div>
+        <div class="cert-issuer">Cisco</div>
+      </div>
+      <span class="cert-status done">✓</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon cisco">🔒</div>
+      <div>
+        <div class="cert-name">Jr Cybersecurity Analyst</div>
+        <div class="cert-issuer">Cisco</div>
+      </div>
+      <span class="cert-status done">✓</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon cybrary">📋</div>
+      <div>
+        <div class="cert-name">GRC Analyst</div>
+        <div class="cert-issuer">Cybrary</div>
+      </div>
+      <span class="cert-status done">✓</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="full-divider" style="margin-top:80px;">
+
+<!-- PUBLICATIONS -->
+<div id="publications" style="position:relative;z-index:1;padding:0 48px;">
+<div style="max-width:1100px;margin:0 auto;padding:80px 0;">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Publications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="pub-list">
+    <div class="pub-card">
+      <span class="pub-type book">BOOK · Amazon KDP</span>
+      <div>
+        <div class="pub-title">From Alert to Adversaries</div>
+        <div class="pub-desc">Building SOC and CTI Capabilities the Right Way. A practical guide to blue team operations — from alert triage through adversary tracking — written from hands-on SOC experience.</div>
+      </div>
+    </div>
+    <div class="pub-card">
+      <span class="pub-type article">ARTICLE · Medium · 2025</span>
+      <div>
+        <div class="pub-title">Embracing AI Prompt Engineering: A Cybersecurity Professional's Journey</div>
+        <div class="pub-desc">Exploring the integration of generative AI into SOC workflows and the emergence of prompt engineering as a technical security skill.</div>
+      </div>
+    </div>
+    <div class="pub-card">
+      <span class="pub-type upcoming">UPCOMING · Book</span>
+      <div>
+        <div class="pub-title">Dark Signals: The Blue Team Chronicles</div>
+        <div class="pub-desc">A cybersecurity narrative blending storytelling with Blue Team techniques — bridging technical depth with accessibility for a wider security audience.</div>
+      </div>
+    </div>
+    <div class="pub-card">
+      <span class="pub-type upcoming">UPCOMING · Medium</span>
+      <div>
+        <div class="pub-title">Exploiting IDOR: Understanding Insecure Direct Object Reference Vulnerabilities</div>
+        <div class="pub-desc">Technical deep-dive on IDOR vulnerabilities in modern web applications — real-world attack vectors, exploitation methodology, and mitigation strategies.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="full-divider">
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div>
+      <div class="contact-text">Let's work together.</div>
+      <div class="contact-sub">Open to EU-based roles in EASM, SOC Tier 2, Threat Intelligence, and GRC. Remote or relocation considered.</div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sourajyoti.nehu.ac@gmail.com" class="contact-link">
+        ✉ sourajyoti.nehu.ac@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/sourajyoti-paul-0a2aa9263" class="contact-link">
+        in  linkedin.com/in/sourajyoti-paul-0a2aa9263
+      </a>
+      <a href="https://github.com/Shabyashaachi" class="contact-link">
+        ⌥  github.com/Shabyashaachi
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span style="color:var(--accent)">Sourajyoti Paul</span> · Cybersecurity Portfolio · All projects use fictional companies · Built for EU market · 2025
+</footer>
+
+</body>
+</html>
